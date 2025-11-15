@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arnav Aggarwal</title>
+  <meta name="description" content="Personal website of Arnav Aggarwal" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f7f7fb;
+      --fg: #111827;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --muted: #4b5563;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.07);
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #eef2ff 0, #f9fafb 45%, #f3f4f6 100%);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 32px auto 64px;
+      padding: 0 16px;
+    }
+
+    header.site-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .site-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .site-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    nav.site-nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    nav.site-nav a {
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav.site-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    nav.site-nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
+    .hero {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(209, 213, 219, 0.7);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-main h1 {
+      font-size: 2.1rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-text {
+      font-size: 0.98rem;
+      color: #374151;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .hero-meta h2 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .hero-meta ul {
+      list-style: none;
+    }
+
+    .hero-meta li {
+      margin-bottom: 4px;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      text-decoration: none;
+      transition: background 0.15s ease-out, box-shadow 0.15s ease-out,
+        transform 0.05s ease-out;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+
+    .btn:hover {
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    section {
+      margin-top: 40px;
+    }
+
+    section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #111827;
+    }
+
+    .section-intro {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .card-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .card-body ul {
+      padding-left: 1.1rem;
+      margin-top: 4px;
+    }
+
+    .card-body li {
+      margin-bottom: 3px;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .two-column {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .list-compact {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .list-compact li {
+      margin-bottom: 4px;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div>
+        <div class="site-title">Arnav Aggarwal</div>
+        <div class="site-subtitle">Machine Learning &amp; Neuroscience</div>
+      </div>
+      <nav class="site-nav">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="about">
+      <div class="hero-main">
+        <h1>Hi, I’m Arnav.</h1>
+        <p class="hero-tagline">
+          Undergraduate at MIT working at the intersection of machine learning and neuroscience.
+        </p>
+        <p class="hero-text">
+          I build models that use brain data to understand human perception and cognition, and
+          design artificial systems inspired by those mechanisms. My current work spans EEG–fMRI
+          modeling and biologically plausible speech perception.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">MIT · B.S. in Computer Science (AI &amp; Decision Making)</span>
+          <span class="badge">Minor in Brain &amp; Cognitive Sciences</span>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div>
+          <h2>Research</h2>
+          <ul>
+            <li>Lewis Lab · EEG–fMRI modeling</li>
+            <li>McDermott Lab · Speech &amp; perception</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Interests</h2>
+          <ul>
+            <li>NeuroAI &amp; human-aligned models</li>
+            <li>Neural decoding &amp; representation learning</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Links</h2>
+          <div class="hero-links">
+            <a class="btn btn-primary" href="mailto:arnavxaggs@gmail.com">Email</a>
+            <a class="btn" href="https://github.com/arnav813" target="_blank" rel="noopener">
+              GitHub
+            </a>
+            <a class="btn" href="https://www.linkedin.com/in/arnavaggs/" target="_blank" rel="noopener">
+              LinkedIn
+            </a>
+            <!-- Optional: add a CV link if you host a PDF in this repo
+            <a class="btn" href="ArnavAggarwal_CV.pdf" target="_blank" rel="noopener">
+              CV
+            </a>
+            -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research Experience</h2>
+      <p class="section-intro">
+        I’m interested in using machine learning to answer neuroscience questions and, in turn,
+        using those insights to build better models of perception and cognition.
+      </p>
+
+      <div class="card-list">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              EEG Reconstruction from fMRI
+            </div>
+            <div class="card-meta">
+              Lewis Lab · MIT &middot; 2025–2026 · Cambridge, MA
+            </div>
+          </div>
+          <div class="card-subtitle">
+            Advisor: Dr. Laura Lewis
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                Built machine learning models to reconstruct EEG rhythms from simultaneously
+                recorded fMRI data, achieving Pearson correlations of 0.44 (alpha) and 0.41 (delta),
+                improving over prior separate-model results of 0.41 and 0.30.
+              </li>
+              <li>
+                Extending this framework to reconstruct full EEG spectrograms to probe how
+                spatially specific fMRI activity relates to fast neural dynamics.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">
+              Categorical Perception in Humans &amp; Models
+            </div>
+            <div class="card-meta">
+              McDermott Lab · MIT &middot; 2025 · Cambridge, MA
+            </div>
+          </div>
+          <div class="card-subtitle">
+            Advisor: Dr. Josh McDermott
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                Designed and ran experiments comparing categorical perception in humans with a
+                biologically plausible speech recognition model; work submitted to the
+                Association for Research in Otolaryngology.
+              </li>
+              <li>
+                Built ML models, generated computational speech stimuli, and conducted human
+                behavioral experiments to align model behavior with perceptual data.
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Selected Projects</h2>
+      <div class="two-column">
+        <div>
+          <p class="section-intro">
+            I enjoy building end-to-end systems that solve real problems, from sports analytics
+            to author-style modeling.
+          </p>
+
+          <div class="card-list">
+            <article class="card">
+              <div class="card-header">
+                <div class="card-title">ErgOCR</div>
+                <div class="card-meta">2025 · Personal Project</div>
+              </div>
+              <div class="card-subtitle">
+                Automated transcription of rowing machine workout scores.
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>
+                    Developed an application to detect and transcribe rowing machine scores
+                    from screen images using object detection, perspective correction, and OCR.
+                  </li>
+                  <li>
+                    Achieved 96% transcription accuracy on a held-out test set, reducing a
+                    three-person score-entry process by 10× and deploying it into MIT Crew’s
+                    workflow.
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <div class="card-title">LLMimic</div>
+                <div class="card-meta">2024 · Personal Project</div>
+              </div>
+              <div class="card-subtitle">
+                Personalized author-style emulation with fine-tuning and RAG.
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>
+                    Built a tool for author style emulation, combining language model
+                    fine-tuning with retrieval-augmented generation.
+                  </li>
+                  <li>
+                    Improved style accuracy by 25% using authorship-attribution models and
+                    increased stylistic alignment by 85% over baseline using BLEU-based metrics.
+                  </li>
+                  <li>
+                    Designed an evaluation framework integrating BLEU and AA metrics to
+                    validate model behavior across diverse writing scenarios.
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-list">
+            <article class="card">
+              <div class="card-header">
+                <div class="card-title">LuxTronic · ML Intern</div>
+                <div class="card-meta">2024 · Remote</div>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>
+                    Upgraded object detection pipelines to YOLOv10, yielding ~5% average
+                    accuracy improvements on challenging customer datasets while maintaining
+                    backward compatibility.
+                  </li>
+                  <li>
+                    Developed a CycleGAN to generate synthetic clear-bottle images from dark
+                    bottles, addressing data scarcity for training detection models.
+                  </li>
+                  <li>
+                    Simplified client access to factory data by building a GPT-4o + RAG
+                    interface, enabling natural-language queries over operational data.
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <h2>Teaching &amp; Mentoring</h2>
+      <p class="section-intro">
+        I value teaching as a way to clarify my own understanding and help others build strong
+        foundations in AI and programming.
+      </p>
+
+      <div class="card-list">
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Teaching Assistant · Artificial Intelligence and Rationality</div>
+            <div class="card-meta">Fall 2025 · MIT</div>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                Guided students in office hours on both the technical and philosophical components
+                of the course, from mathematical problem sets to writing assignments.
+              </li>
+              <li>
+                Tested and provided feedback on homework and exam questions for course staff.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-header">
+            <div class="card-title">Teaching Assistant · Fundamentals of Programming</div>
+            <div class="card-meta">Fall 2024 · MIT</div>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                Helped students debug code and reason through complex programming assignments
+                during office hours.
+              </li>
+              <li>
+                Checked students’ understanding of their solutions, as well as code clarity,
+                complexity, and readability.
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="two-column">
+        <div>
+          <p class="section-intro">
+            The best way to reach me is by email. I’m always happy to talk about research,
+            potential collaborations, or anything at the ML–neuroscience interface.
+          </p>
+        </div>
+        <div>
+          <ul class="list-compact">
+            <li><strong>Email:</strong> <a href="mailto:arnavxaggs@gmail.com">arnavxaggs@gmail.com</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/arnav813" target="_blank" rel="noopener">github.com/arnav813</a></li>
+            <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/arnavaggs/" target="_blank" rel="noopener">linkedin.com/in/arnavaggs</a></li>
+            <li><strong>Location:</strong> Boston / Cambridge, MA</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &copy; <span id="year"></span> Arnav Aggarwal. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
